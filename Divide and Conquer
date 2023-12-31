@@ -1,0 +1,12 @@
+def min_max(array,low,high):
+    if low==high:
+        return array[low],array[low]
+    mid=(low+high)//2
+    min_left,max_left=min_max(array,low,mid)
+    min_right,max_right=min_max(array,mid+1,high)
+    return min(min_left,min_right),max(max_left,max_right)
+array=input('Enter any element to find maximum and minimum element: ').split()
+array=[int(x) for x in array]
+min_value,max_value=min_max(array,0,len(array)-1)
+print('The minimum value is: ',min_value)
+print('The maximum value is: ',max_value)
