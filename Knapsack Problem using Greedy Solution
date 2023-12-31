@@ -1,0 +1,27 @@
+def knapsack_recursive(weights, values, capacity, n):
+    if capacity == 0 or n== 0:
+        return 0, []
+
+    if weights[n-1]> capacity:
+        return knapsack_recursive(weights, values, capacity, n - 1)
+
+    include_value, include_items = knapsack_recursive(weights,values, capacity - weights[n-1], n-1)
+    include_value+= values[n-1]
+    exclude_value, exclude_items = knapsack_recursive(weights, values, capacity, n-1)
+    if include_value> exclude_value: 
+        return include_value,include_items
+    else:
+        return exclude_value,exclude_items
+n = int(input("Enter the number of items:"))
+weights = []
+values = []
+print("Enter weights:")
+for i in range(n):
+    weights.append(int(input()))
+print("Enter values:")
+for i in range(n):
+    values.append(int(input()))
+    capacity = int(input("Enter the capacity of the knapsack:"))
+    optimal_value, optimal_items = knapsack_recursive(weights, values, capacity, n)
+    print("Optimal Value:", optimal_value)
+    print("Optimal Items (0-based indices):", optimal_items)
