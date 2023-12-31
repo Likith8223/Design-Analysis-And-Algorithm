@@ -1,0 +1,28 @@
+def find_subset_with_sum(s, d):
+    def find_subset_recursive(index, current_sum, current_subset):
+
+        if current_sum == d:
+            subsets.append(list(current_subset))
+            return
+        if current_sum>d or index == len(s):
+            return
+        
+        current_subset.add(s[index])
+        find_subset_recursive(index + 1, current_sum + s[index], current_subset)
+        current_subset.remove(s[index])
+        find_subset_recursive(index + 1, current_sum, current_subset)
+
+    subsets = []
+    find_subset_recursive(0, 0, set())
+    return subsets
+
+s = set(map(int, input("Enter the elements(seperated by spaces): ").split()))
+d = int(input("Enter the target sum: "))
+result = find_subset_with_sum(list(s), d)
+
+if result:
+    print("Subsets with sum", d, "found: ")
+    for subsets in result:
+        print(set(subsets))
+else:
+    print("No subsets found with sum: ", d)
