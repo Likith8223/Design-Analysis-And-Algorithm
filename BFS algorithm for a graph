@@ -1,0 +1,31 @@
+#BFS algorithm for a graph
+
+import queue
+def bfs(visited,graph,node):
+    visited.append(node)
+    queue.append(node)
+    while queue:
+        s=queue.pop(0)
+        print(s,end=' ')
+        for neghibour in graph[s]:
+            if neghibour not in visited:
+                visited.append(neghibour)
+                queue.append(neghibour)
+
+graph={
+    
+'A':['B','C'],
+'B':['D','E'],
+'C':['F'],
+'D':[],
+'E':['F'],
+'F':[]
+
+}
+
+visited=[]
+
+queue=[]
+
+print("BFS traversal is:")
+bfs(visited,graph,'C')
