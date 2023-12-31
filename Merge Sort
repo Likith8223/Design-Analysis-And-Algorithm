@@ -1,0 +1,35 @@
+import random
+import time
+def merge_sort(arr):
+    if len(arr)>1:
+        mid=len(arr)//2
+        left_half=arr[:mid]
+        right_half=arr[mid:]
+
+        merge_sort(left_half)
+        merge_sort(right_half)
+
+        i=j=k=0
+
+        while i<len(left_half)and j<len(right_half):
+            if left_half[i]<=right_half[j]:
+                arr[k]=left_half[i]
+                i+=1
+            else:
+                arr[k]=right_half[j]
+                j+=1
+# according to textbook algorithm
+        if i==len(left_half):
+           arr[k:len(left_half)+len(right_half)]=right_half[j:len(right_half)]
+
+        else:
+            arr[k:len(left_half)+len(right_half)]=left_half[i:len(left_half)]
+n=int(input("Enter the number of elements(more then 5000):"))
+arr=[random.randint(1,1000000)for _ in range(n)]
+# print(f'Before{arr}')
+start_time=time.time()
+merge_sort(arr)
+# print(f'After{arr}')
+end_time=time.time()
+execution_time=end_time-start_time
+print(f"Sorting time for n={n}:{execution_time:6f} seconds")
